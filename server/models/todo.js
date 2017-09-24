@@ -1,12 +1,17 @@
+const mongoose = require('mongoose')
+
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var Todo = new Schema({
-    activity    : String,
-    description: String,
-		userId : {
-
-		}
+var todoSchema = new Schema({
+  task    : String,
+  dateTask: Date,
+  status  : Boolean,
+  tags    : String,
+  creator : {type:Schema.Types.ObjectId, ref:"User"}
+},{
+  timestamps: true
 });
 
+var Todo = mongoose.model('Todo', todoSchema)
 module.exports = Todo

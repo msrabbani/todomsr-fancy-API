@@ -1,9 +1,19 @@
-const model = require('../models/User')
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-var userAuth = (req, res, next => {
-	var token = req.body.token
-	console.log(token)
-	jwt.verify(token,)
-})
+var authUser = function(req, res, next) {
+  var token = req.headers.token;
+  jwt.verify(token, process.env.KEY_SCRT, (err, decoded) => {
+    if(decoded) {
+      req['dataUser'] = decoded;
+      console.log(req);
+      next()
+    } else {
+      res.send(err)
+    }
+  })
+}
+
+module.exports = {
+  authUser
+};

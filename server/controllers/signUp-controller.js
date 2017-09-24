@@ -21,14 +21,12 @@ var signUp = (req,res) => {
 		username:req.body.username,
 		password:hash,
 		email:req.body.email,
-		salt:salt
 	})
 	.then((data)=>{
 		res.send('data sudah masuk')
 	}).catch(err=>{
 		res.send(err)
 	})
-
 }
 
 

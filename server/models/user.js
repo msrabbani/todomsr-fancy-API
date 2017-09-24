@@ -19,9 +19,6 @@ var userSchema = new Schema({
 		email		: {
 			type: String,
 			required:[true,'Email tidak boleh kosong']
-		},
-    salt    : {
-			type: String,
 		}
 });
 
