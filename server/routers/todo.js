@@ -6,7 +6,6 @@ const auth = require('../controllers/auth-controller')
 
 router.post('/', auth.authUser, todo.createTodo)
 router.get('/', auth.authUser, todo.getAllTodo)
-router.get('/:id', auth.authUser, todo.getSingleTodo)
 router.delete('/:id', auth.authUser, todo.deleteTodo)
 router.put('/:id', auth.authUser, todo.updateTodo)
 

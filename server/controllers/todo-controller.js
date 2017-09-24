@@ -23,42 +23,52 @@ var getAllTodo = (req,res) => {
 	})
 }
 
-var getSingleTodo = (req,res) => {
-  Todo.find({_id:req.params.id})
-  .then(dataTodo => {
-    res.send(dataTodo)
-  }).catch(err => {
-    res.send(err)
-  })
-}
 
-var updateTodo = (req,res) =>{
-  Todo.update({_id:req.dataUser._id},{
-    task  :req.body.task,
-    dateTask: req.body.dateTask,
-    status: req.body.status,
-    tags: req.body.tags,
-    creator: req.body.creator
-  }).then(dataTodo=>{
-    res.send(dataTodo)
-  }).catch(err => {
+var updateTodo = (req,res) => {
+  Todo.findById({_id:req.params.id})
+  .then(dataTodo=>{
+    // console.log("ini data Todo ==> ",dataTodo);
+    if (dataTodo.creator == req.dataUser._id) {
+      Todo.update({
+        _id:dataTodo.id
+      }, {
+        $set:{
+          task  :req.body.task || dataTodo.task,
+          dateTask: req.body.dateTask || dataTodo.dataTask,
+          status: req.body.status || dataTodo.status,
+          tags: req.body.tags || dataTodo.tags
+        }
+      }).then(todoUpdate=>{
+        console.log('berhasil di update');
+        res.send(todoUpdate)
+      }).catch(err=>{
+        res.send(err)
+      })
+    } else {
+      res.send('anda tidak punya wewenang untuk mengedit data ini!!')
+    }
+  }).catch(err=>{
     res.send(err)
   })
 }
 
 var deleteTodo  = (req,res)=>{
-  Todo.remove({_id:req.params.id})
-  .then(dataTodo=>{
-    res.send('user has been delete')
-  }).catch(err => {
-    res.send(err)
+  Todo.findById({_id:req.params.id}).then(dataTodo=>{
+    if (dataTodo.creator == req.dataUser._id) {
+      Todo.remove({_id:dataTodo.id}).then(x=>{
+        res.send('Todo has been remove')
+      }) .catch(err=>{
+        res.send(err)
+      })
+    }else {
+      res.send('anda tidak punya wewenang untuk menghapus sata ini!!')
+    }
   })
 }
 
 module.exports = {
   createTodo,
   getAllTodo,
-  getSingleTodo,
   updateTodo,
   deleteTodo
 }
