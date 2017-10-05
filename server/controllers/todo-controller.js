@@ -3,10 +3,9 @@ const Todo = require('../models/todo')
 var createTodo = (req,res) => {
   Todo.create({
     task  :req.body.task,
-    dateTask: req.body.dateTask,
     status: req.body.status,
     tags: req.body.tags,
-    creator: req.body.creator
+    creator: req.dataUser._id
   }).then(dataTodo=>{
     res.send(dataTodo)
   }).catch(err=>{
@@ -22,7 +21,6 @@ var getAllTodo = (req,res) => {
 		res.send(err)
 	})
 }
-
 
 var updateTodo = (req,res) => {
   Todo.findById({_id:req.params.id})

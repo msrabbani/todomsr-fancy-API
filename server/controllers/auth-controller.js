@@ -6,7 +6,7 @@ var authUser = function(req, res, next) {
   jwt.verify(token, process.env.KEY_SCRT, (err, decoded) => {
     if(decoded) {
       req['dataUser'] = decoded;
-      console.log(req);
+      // console.log(req);
       next()
     } else {
       res.send(err)

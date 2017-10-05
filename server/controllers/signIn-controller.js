@@ -3,14 +3,9 @@ const express = require('express')
 const app = express()
 const model = require('../models/user')
 const bcrypt = require('bcryptjs')
-const bodyParser = require('body-parser')
-var jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
-// parse application/json
-app.use(bodyParser.json())
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
 
 var signIn = (req,res) => {
 	model.find({
@@ -18,7 +13,7 @@ var signIn = (req,res) => {
 	}).then(data_user=>{
 		console.log('==>',data_user);
 		if (bcrypt.compareSync(req.body.password, data_user[0].password)) {
-			console.log('berhasil login');
+			console.log('====berhasil login===');
 			var buatToken = {
 				_id:data_user[0]._id,
 				name:data_user[0].name,
@@ -38,5 +33,5 @@ var signIn = (req,res) => {
 
 
 module.exports = {
-	signIn,
+	signIn
 }

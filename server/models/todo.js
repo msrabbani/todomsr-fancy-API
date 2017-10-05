@@ -5,7 +5,6 @@ var Schema = mongoose.Schema,
 
 var todoSchema = new Schema({
   task    : String,
-  dateTask: Date,
   status  : Boolean,
   tags    : String,
   creator : {type:Schema.Types.ObjectId, ref:"User"}
