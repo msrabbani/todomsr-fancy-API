@@ -6,8 +6,8 @@
         <div class="hero-body">
           <div class="container section">
             <div class="has-text-right">
-              <h1 class="title is-1">Login</h1> <br>
-              <p class="title is-3">Secure User Account Login</p>
+              <h1 class="title is-1">Signin</h1> <br>
+              <p class="title is-3">Secure User Account Signin</p>
             </div>
           </div>
         </div>
@@ -83,16 +83,20 @@ export default {
       })
       .then(response => {
         localStorage.setItem('token', response.data.auth)
-        this.$router.push('/home')
+        this.$router.push('/index')
       }).catch(err => {
         console.log(err)
       })
     }
   },
   created () {
-    var token = localStorage.getItem('token') // js native, js yang ada di browser
-    if (token) {
-      this.$router.push('/home')
+    // console.log(localStorage.token)
+    if (localStorage.token) {
+      if (localStorage.token === 'undefined') {
+        this.$router.push('/')
+      } else {
+        this.$router.push('/index')
+      }
     } else {
       this.$router.push('/')
     }
