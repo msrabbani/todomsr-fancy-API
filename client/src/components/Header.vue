@@ -8,6 +8,7 @@
         <h2 class="subtitle">
         </h2>
       </div>
+      <a class="button is-light" @click="signout">Signout</a>
     </div>
   </section>
 
@@ -15,6 +16,12 @@
 
 <script>
 export default {
+  methods: {
+    signout () {
+      localStorage.removeItem('token')
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 

@@ -1,13 +1,15 @@
 <template lang="html">
   <div>
     <headers/>
-    <todo :dataTodos='dataTodos'/>
+    <todos :dataTodos='dataTodos'/>
+    <!-- <footers></footers> -->
   </div>
 </template>
 
 <script>
 import headers from './Header'
-import todo from './Todoform'
+import todos from './Todoform'
+import footers from './Footer'
 import axios from 'axios'
 export default {
   data () {
@@ -17,7 +19,8 @@ export default {
   },
   components: {
     headers,
-    todo
+    todos,
+    footers
   },
   methods: {
     getTodo () {
@@ -27,7 +30,7 @@ export default {
         }
       })
       .then(dataTodo => {
-        console.log('===', dataTodo.data)
+        // console.log('===', dataTodo.data)
         this.dataTodos = dataTodo.data
       }).catch(err => {
         console.log(err)
@@ -35,11 +38,21 @@ export default {
     }
   },
   created () {
-    var token = localStorage.getItem('token')
-    console.log('token nya nih ', token)
-    if (!token || token === undefined) {
+    if (localStorage.token) {
+      if (localStorage.token === 'undefined') {
+        this.$router.push('/')
+      } else {
+        this.$router.push('/index')
+      }
+    } else {
       this.$router.push('/')
     }
+    // var token = localStorage.getItem('token')
+    // if (!token) {
+    //   this.$router.push('/')
+    // } else {
+    //   this.$router.push('/index')
+    // }
     this.getTodo()
   }
 }
