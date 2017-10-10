@@ -15,8 +15,8 @@ const user = require('./routers/user')
 const todo = require('./routers/todo')
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/todo-api');
-// mongoose.connect('mongodb://msr:msr1234@cluster0-shard-00-00-g7yx7.mongodb.net:27017,cluster0-shard-00-01-g7yx7.mongodb.net:27017,cluster0-shard-00-02-g7yx7.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
+// mongoose.connect('mongodb://localhost/todo-api');
+mongoose.connect('mongodb://msr:tgW4JaucShOYLAxb@cluster0-shard-00-00-g7yx7.mongodb.net:27017,cluster0-shard-00-01-g7yx7.mongodb.net:27017,cluster0-shard-00-02-g7yx7.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 // var MongoClient = require('mongodb').MongoClient;
 //
 // var uri = "mongodb://msr:msr1234@cluster0-shard-00-00-g7yx7.mongodb.net:27017,cluster0-shard-00-01-g7yx7.mongodb.net:27017,cluster0-shard-00-02-g7yx7.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
@@ -30,6 +30,6 @@ app.use('/signin', signin)
 app.use('/users', user)
 app.use('/todo', todo)
 
-app.listen(3003,()=>{
+app.listen(3003 || process.env.PORT,()=>{
 	console.log('express, port 3003');
 })
