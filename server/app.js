@@ -30,6 +30,6 @@ app.use('/signin', signin)
 app.use('/users', user)
 app.use('/todo', todo)
 
-app.listen(3003 || process.env.PORT,()=>{
+app.listen(process.env.PORT || 3003,()=>{
 	console.log('express, port 3003');
 })
