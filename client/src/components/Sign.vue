@@ -44,7 +44,7 @@
                     </span>
                   </p>
                   <p class="control login">
-                    <button class="button is-success is-outlined is-large is-fullwidth" @click="signin()">Signin</button>
+                    <button class="button is-success is-outlined is-large is-fullwidth" type="button" @click="signin()">Signin</button>
                   </p>
                 </div>
                 <div class="section forgot-password">
@@ -77,11 +77,12 @@ export default {
   },
   methods: {
     signin () {
-      axios.post('http://localhost:3003/signin', {
+      axios.post('http://35.198.197.115/signin', {
         username: this.formSignIn.username,
         password: this.formSignIn.password
       })
       .then(response => {
+        console.log('=============================', response.data)
         localStorage.setItem('token', response.data.auth)
         this.$router.push('/index')
       }).catch(err => {

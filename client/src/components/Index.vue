@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     getTodo () {
-      axios.get('http://localhost:3003/todo/', {
+      axios.get('http://35.198.197.115/todo/', {
         headers: {
           token: localStorage.getItem('token') // untuk mendapatkan authorisasi ketika getData users
         }

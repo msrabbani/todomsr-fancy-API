@@ -128,7 +128,7 @@ export default {
       this.modalEditTaskClass = 'modal'
     },
     addNewTask () {
-      axios.post('http://localhost:3003/todo/', {
+      axios.post('http://35.198.197.115/todo/', {
         task: this.formAddtask.task,
         tags: this.formAddtask.tags
       }
@@ -145,7 +145,7 @@ export default {
        })
     },
     deleteTask (id, index) {
-      axios.delete('http://localhost:3003/todo/' + id, {
+      axios.delete('http://35.198.197.115/todo/' + id, {
         headers: {
           token: localStorage.getItem('token')
         }
@@ -157,7 +157,7 @@ export default {
       })
     },
     editTask (id) {
-      axios.put('http://localhost:3003/todo/' + id, {
+      axios.put('http://35.198.197.115/todo/' + id, {
         task: this.formEditTask.task,
         tags: this.formEditTask.tags
       }, {
